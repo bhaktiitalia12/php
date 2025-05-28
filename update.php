@@ -16,6 +16,8 @@ $sno = '';
 $name = '';
 $email = '';
 $concern = '';
+$gender = '';
+$hobbies = [];
 
 // Step 1: Fetch record data based on `sno`
 if (isset($_GET['sno'])) {
@@ -28,6 +30,8 @@ if (isset($_GET['sno'])) {
     $name = $row['name'];
     $email = $row['email'];
     $concern = $row['concern'];
+    $gender = $row['gender'];
+    $hobbies = explode(", ", $row['hobbies']);
   } else {
     echo "<div style='color:red;'>No record found for Sno: $sno</div>";
     exit();
@@ -40,8 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $name = mysqli_real_escape_string($conn, $_POST['name']);
   $email = mysqli_real_escape_string($conn, $_POST['email']);
   $concern = mysqli_real_escape_string($conn, $_POST['desc']);
+  $gender = mysqli_real_escape_string($conn, $_POST['gender']);
+  $hobbies = mysqli_real_escape_string($conn, implode(", ", $_POST['hobbies'] ?? []));
 
-  $updateSql = "UPDATE contactus SET name='$name', email='$email', concern='$concern' WHERE sno=$sno";
+
+
+  $updateSql = "UPDATE contactus SET name='$name', email='$email', concern='$concern', gender='$gender', hobbies='$hobbies' WHERE sno=$sno";
   $updateResult = mysqli_query($conn, $updateSql);
 
   if ($updateResult) {
@@ -123,7 +131,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <div class="mb-3">
         <label for="desc" class="form-label">Description</label>
         <textarea class="form-control" id="desc" name="desc" rows="5" cols="30"><?php echo htmlspecialchars($concern); ?></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="desc" class="form-label">Gender</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" value="Male" <?php if ($gender == "Male") echo "checked"; ?>>
+          <label class="form-check-label" for="radioDefault1">
+            Male
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" value="Female" <?php if ($gender == "Female") echo "checked"; ?>>
+          <label class="form-check-label" for="radioDefault2">
+            Female
+          </label>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="desc" class="form-label">Hobbies</label>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="Traveling" <?php if (in_array("Traveling", $hobbies)) echo "checked"; ?> name="hobbies[]">
+          <label class="form-check-label" for="checkDefault">
+            Traveling
+          </label>
 
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="Singing" <?php if (in_array("Singing", $hobbies)) echo "checked"; ?> name="hobbies[]">
+          <label class="form-check-label" for="checkChecked">
+            Singing
+          </label>
+        </div>
       </div>
       <div class="mb-3 form-check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1">

@@ -57,6 +57,9 @@
     $name = $_POST['name'];
     $email = $_POST['email'];
     $desc = $_POST['desc'];
+    $gender  = $_POST['gender'];
+    $hobbies = isset($_POST['hobbies']) ? implode(", ", $_POST['hobbies']) : "";
+    
 
 
     // if (empty($email) || empty($name) || empty($desc)) {
@@ -85,7 +88,7 @@
     // echo "Connected to existing database '$dbname' successfully!<br>";
 
     // $sql = "INSERT INTO `trip` ( `name`, `dob`, `sub`) VALUES ('Susi', '2025-07-15', 'C++')";
-    $sql = "INSERT INTO `contactus` ( `name`, `email`, `concern`, `date`) VALUES ( '$name', '$email', '$desc', current_timestamp())";
+    $sql = "INSERT INTO `contactus` ( `name`, `email`, `concern`, `date`,`gender`,`hobbies`) VALUES ( '$name', '$email', '$desc', current_timestamp(),'$gender','$hobbies')";
 
     $result = mysqli_query($conn, $sql);
     if ($result) {
@@ -114,6 +117,40 @@
       <div class="mb-3">
         <label for="desc" class="form-label">Description</label>
         <textarea class="form-control" id="desc" name="desc" rows="5" cols="30"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="desc" class="form-label">Gender</label>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="radioDefault1" value="Male">
+          <label class="form-check-label" for="radioDefault1">
+            Male
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="gender" id="radioDefault2" value="Female">
+          <label class="form-check-label" for="radioDefault2">
+            Female
+          </label>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="desc" class="form-label">Hobbies</label>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="Traveling" id="checkDefault" name="hobbies[]">
+          <label class="form-check-label" for="checkDefault">
+            Traveling
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="Singing" id="checkChecked" name="hobbies[]">
+          <label class="form-check-label" for="checkChecked">
+            Singing
+          </label>
+        </div>
+      </div>
+      <div class="mb-3">
+ 
+        <input type="file" name="image" accept="image/*">
 
       </div>
       <div class="mb-3 form-check">

@@ -1,0 +1,6 @@
+hello, my name is bhakti
+learn php with me!
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit inventore 
+laborum voluptates voluptatibus corporis odio, quaerat
+quas voluptatem ullam eligendi assumenda 
+voluptas officiis quae ducimus nobis, tenetur blanditiis tempore non?
