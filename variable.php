@@ -43,4 +43,14 @@ echo var_dump($num);
 echo "<br><br>";
 echo "Name : ";
 echo var_dump($name);
+
+
 echo "<br><br>";
+
+$name = 'Linus';
+echo '<h1>Hello $name</h1>';  // This will not parse the variable, it will output the literal string $name
+echo "<h1>Hello $name</h1>"; // This will parse the variable and output "Hello Linus"
+
+$name = 'Linus';
+print '<h1>Hello $name</h1>';
+print "<h1>Hello " . $name . "</h1>";

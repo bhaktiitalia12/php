@@ -103,7 +103,7 @@
   <!-- ------------------------------------------------------------------------------------------------------------- -->
   <div class="container mt-5">
     <h2 class="mb-2">Contact us for your concerns</h2>
-    <form action="" method="POST">
+    <form action="signup.php" method="POST">
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>
         <input type="text" class="form-control" id="name" name="name">
