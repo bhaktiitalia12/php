@@ -53,7 +53,6 @@
   <?php
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-
     $name = $_POST['name'];
     $email = $_POST['email'];
     $desc = $_POST['desc'];
@@ -103,7 +102,7 @@
   <!-- ------------------------------------------------------------------------------------------------------------- -->
   <div class="container mt-5">
     <h2 class="mb-2">Contact us for your concerns</h2>
-    <form action="signup.php" method="POST">
+    <form action="getpost.php" method="POST">
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>
         <input type="text" class="form-control" id="name" name="name">
