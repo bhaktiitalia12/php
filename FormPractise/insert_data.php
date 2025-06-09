@@ -36,6 +36,7 @@
       die("Connection failed: " . mysqli_connect_error());
     }
 
+
     $sql = "INSERT INTO `datetime` ( `date`, `days`, `time`) VALUES ( '$date', '$days', '$time')";
     $result = mysqli_query($conn, $sql);
 
@@ -125,7 +126,7 @@
       "November",
       "December"
     ];
-    
+
     foreach ($months as $index => $month) {
       echo '
       

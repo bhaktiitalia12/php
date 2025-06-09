@@ -58,8 +58,6 @@
     $desc = $_POST['desc'];
     $gender  = $_POST['gender'];
     $hobbies = isset($_POST['hobbies']) ? implode(", ", $_POST['hobbies']) : "";
-    
-
 
     // if (empty($email) || empty($name) || empty($desc)) {
     //   echo "<div class='alert alert-danger' role='alert'>Please fill in all fields.</div>";
@@ -67,22 +65,25 @@
     //   echo "<div class='alert alert-warning' role='alert'>Your data has been submitted successfully</div>";
     // }
 
-
     //connect to the database
     $servername  =  "localhost";
     $username = "root";
     $password = "";
     $dbname = "contacts";
 
+    echo "Server: $servername<br>";
+    echo "User: $username<br>";
+    echo "DB: $dbname<br>";
+
     //create connection
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
+    $conn = mysqli_connect($servername, $username, $password, $dbname, 3307);
 
     //die if connection fails
-    // if (!$conn) {
-    //   die("connection failed:" . mysqli_connect_error());
-    // } else {
-    //   echo "Connected successfully<br>";
-    // }
+    if (!$conn) {
+      die("connection failed:" . mysqli_connect_error());
+    } else {
+      echo "Connected successfully<br>";
+    }
 
     // echo "Connected to existing database '$dbname' successfully!<br>";
 
@@ -103,11 +104,7 @@
   <div class="container mt-5">
     <h2 class="mb-2">Contact us for your concerns</h2>
     <form action="getpost.php" method="POST">
-      <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
-        <input type="text" class="form-control" id="name" name="name">
 
-      </div>
       <div class="mb-3">
         <label for="email" class="form-label">Email</label>
         <input type="email" class="form-control" id="email" name="email">
@@ -147,15 +144,8 @@
           </label>
         </div>
       </div>
-      <div class="mb-3">
- 
-        <input type="file" name="image" accept="image/*">
 
-      </div>
-      <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-      </div>
+
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
   </div>

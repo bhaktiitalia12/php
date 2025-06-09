@@ -22,11 +22,12 @@ if ($sno) {
   }
 }
 
-function getAvailableStartDate($disabledDays, $disabledDates, $addDay = 10)
+function afterTenDayAdd($disabledDays, $disabledDates, $addDay = 10)
 {
   $count = 0;
   $currentDate = date('Y-m-d');
   $date = new DateTime($currentDate);
+  echo "Current Date: " . date_format($date, 'Y-m-d (l)') . "<br><br>";
 
 
   while ($count < $addDay) {
@@ -39,11 +40,14 @@ function getAvailableStartDate($disabledDays, $disabledDates, $addDay = 10)
 
     date_modify($date, '+1 day');
   }
+  echo "Holiday Dates: " . implode(", ", $disabledDates) . "<br><br>";
+  echo "Disabled Days: " . implode(", ", $disabledDays) . "<br><br>";
+  echo "After add 10 days : " . date_format($date, 'Y-m-d (l)');
 
   return date_format($date, 'Y-m-d');
 }
 
-$minAvailableDate = getAvailableStartDate($disabledDays, $disabledDates);
+$minAddDate = afterTenDayAdd($disabledDays, $disabledDates);
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +62,7 @@ $minAvailableDate = getAvailableStartDate($disabledDays, $disabledDates);
 
 <body style="font-family: Arial, sans-serif; padding: 20px; display: flex; flex-direction: column; align-items: center;">
 
-  <h3>Select available date</h3>
+  <h3>Select date after 10 day added </h3>
   <input type="text" id="datepicker" placeholder="Select date" style="width: 300px; padding: 10px; font-size: 16px;">
 
   <script>
@@ -82,12 +86,12 @@ $minAvailableDate = getAvailableStartDate($disabledDays, $disabledDates);
 
     const disabledDays = <?php echo json_encode($disabledDays); ?>;
     const disabledDates = <?php echo json_encode($disabledDates); ?>;
-    const minAvailableDate = new Date('<?php echo $minAvailableDate; ?>');
+    const minAddDate = new Date('<?php echo $minAddDate; ?>');
 
     new AirDatepicker('#datepicker', {
       locale: customLocale,
       autoClose: true,
-      minDate: minAvailableDate,
+      minDate: minAddDate,
       onRenderCell({
         date,
         cellType
@@ -107,6 +111,11 @@ $minAvailableDate = getAvailableStartDate($disabledDays, $disabledDates);
         }
       }
     });
+
+
+    const date = new Date();
+    const day = date.getDay(); // Returns 0 (Sunday) to 6 (Saturday)
+    console.log("Current day of the week: " + day);
   </script>
 
 </body>
